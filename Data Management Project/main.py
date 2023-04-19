@@ -223,22 +223,12 @@ def login(list_of_dicts):
     for dictvar in list_of_dicts:
         if dictvar['username'] == uservar and dictvar['password'] == passvar:
             print(f"Welcome back {uservar}")
+            #loads the playlist that is applicable to the right dictionary
             playlist = list_of_dicts[list_of_dicts.index(dictvar)]['playlist']
-            load_account(uservar, passvar, accounts)
+            #load_account(uservar, passvar, accounts)
             return (uservar, passvar)
 
     print("Invalid username or password. Please try again.")
-    return None
-    
-
-def load_account(uservar, passvar, accounts):
-    for account in accounts:
-        if account['username'] == uservar and account['password'] == passvar:
-            # Update the loaded account's playlist with the current playlist
-            account['playlist'] = playlist
-            print("Account loaded.")
-            return account
-
     return None
 
 
@@ -290,15 +280,15 @@ def insertion_sort(list_of_dicts, key):
 def add_to_playlist(shop_list):
     ynselect = input("\nWould you like to shop? [Y/N]\n> ")
     if ynselect.lower() == "y":
-        num = int(input("What song # would you like?\n> "))
         try:
+            num = int(input("What song # would you like?\n> "))
             if shop_list[num - 1] in playlist:
                 print("Hey silly that's a repeat ',:(")
             else:
                 playlist.append(shop_list[num - 1])
 
                 print(f"{shop_list[num-1]['title']} added")
-        except IndexError:
+        except ValueError or IndexError:
             print("Invalid.")
     
 
